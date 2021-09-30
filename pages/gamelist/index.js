@@ -1,11 +1,14 @@
 import React from 'react';
 import { Row, Col } from 'antd';
+import GameCard from '../../components/Gamelist/GameCard';
 
 function GameList() {
   return (
-    <div className="container">
-      <Row style={{ width: '100%', maxWidth: 1200 }}>
-        <Col>Gamelist</Col>
+    <div className="wrapper">
+      <Row className="container">
+        <Col span={8}>
+          <GameCard />
+        </Col>
       </Row>
     </div>
   );

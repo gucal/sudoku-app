@@ -6,8 +6,8 @@ function Home() {
   const router = useRouter();
 
   return (
-    <div className="container">
-      <Row gutter={[16, 16]} style={{ width: '100%', maxWidth: 1200 }}>
+    <div className="wrapper">
+      <Row gutter={[16, 16]} className="container">
         <Col span={24}>
           <p className="introduction-text">
             Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
