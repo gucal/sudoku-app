@@ -67,6 +67,10 @@ function Game() {
       e.target.value = inputValue.charAt(inputValue.length - 1);
     }
 
+    if (inputValue == 0) {
+      e.target.value = '';
+    }
+
     currentCells[0].cells[i].value = e.target.value;
     if (!checkLineValues(currentCells[0].cells, currentCells[0].cells[i])) {
       errorMessage = true;
