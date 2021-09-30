@@ -1,3 +1,12 @@
+.container {
+  display: flex;
+  justify-content: center;
+}
+.introduction-text {
+  font-size: 18px;
+  text-align: left;
+}
+
 ol,
 ul {
   padding-left: 30px;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Board from '../../components/Board.js';
+import Board from '../../components/Gamepage/Board.js';
 import GameData from '../../data/game.json';
 
 function Game() {
