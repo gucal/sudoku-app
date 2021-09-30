@@ -1,17 +1,121 @@
-.game-page-wrapper {
-  margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  background-color: red;
-}
-.game-page-container {
-  width: 1200px;
-  display: flex;
-  justify-content: center;
-  padding: 30px;
+ol,
+ul {
+  padding-left: 30px;
 }
 
-td {
-  padding: 30px;
-  border: 1px solid black;
+.board-row:after {
+  clear: both;
+  content: '';
+  display: table;
+}
+
+.board-row:nth-child(3) {
+  border-bottom: 3px solid #669;
+}
+
+.board-row:nth-child(6) {
+  border-bottom: 3px solid #669;
+}
+
+.status {
+  margin-bottom: 10px;
+}
+
+.cell {
+  background: #fff;
+  border: 1px solid #999;
+  float: left;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29px;
+  height: 29px;
+  margin-right: -1px;
+  margin-top: -1px;
+  padding: 0;
+  text-align: center;
+  width: 29px;
+}
+
+.cell.error {
+  background: #ffb8b8;
+}
+
+.cell:focus {
+  outline: none;
+}
+
+.cell:nth-child(3) {
+  border-right: 3px solid #669;
+}
+.cell:nth-child(6) {
+  border-right: 3px solid #669;
+}
+
+.kbd-navigation .cell:focus {
+  background: #ddd;
+}
+
+.cell-editable {
+  color: #747474;
+}
+
+.game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.game-info {
+  justify-content: center;
+  display: flex;
+  margin-left: 20px;
+}
+
+.game-board {
+  border-block-color: black;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  border: #669 solid 2px;
+}
+
+.game-board > div {
+  margin-right: 1px;
+}
+
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+@media (min-width: 500px) {
+  .cell {
+    background: #fff;
+    border: 1px solid #999;
+    float: left;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 34px;
+    height: 34px;
+    margin-right: -1px;
+    margin-top: -1px;
+    padding: 0;
+    text-align: center;
+    width: 34px;
+  }
+  .game-info {
+    margin-left: 20px;
+  }
+
+  .game-board {
+    border-block-color: black;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border: #669 solid 2px;
+    margin-left: 12px;
+    margin-right: 4px;
+  }
 }
