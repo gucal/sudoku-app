@@ -17,7 +17,7 @@ function GameCard({ gameNumber }) {
             />
           }
         >
-          <Meta title="Seviye 1" />
+          <Meta title={`Seviye ${gameNumber}`} />
         </Card>
       </a>
     </Link>

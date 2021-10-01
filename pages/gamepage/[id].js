@@ -26,6 +26,19 @@ function Game() {
     }
   }, [id]);
 
+  const storage = async (id) => {
+    let gameHistoryArr = [];
+    let gameHistory = await JSON.parse(localStorage.getItem('gameHistory'));
+    if (gameHistory) {
+      for (let index = 0; index < gameHistory.length; index++) {
+        gameHistoryArr.push(gameHistory[index]);
+      }
+    }
+    gameHistoryArr.push({ id: id, timer: timer });
+    gameHistoryArr = JSON.stringify(gameHistoryArr);
+    localStorage.setItem('gameHistory', gameHistoryArr);
+  };
+
   useEffect(() => {
     if (!timerStop)
       setTimeout(() => {
@@ -179,6 +192,7 @@ function Game() {
         return null;
       }
       setTimerStop(true);
+      storage(id);
       setControlError(false);
       setControlModalVisible(true);
     }
