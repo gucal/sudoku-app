@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Button } from 'antd';
+import { Row, Col, Button, Modal } from 'antd';
 import Board from '../../components/Gamepage/Board.js';
 import GameData from '../../data/game.json';
 
@@ -10,6 +10,8 @@ function Game() {
   const [history, setHistory] = useState([{}]);
   const [timer, setTimer] = useState(0);
   const [timerStop, setTimerStop] = useState(false);
+  const [controlModalVisible, setControlModalVisible] = useState(false);
+  const [controlError, setControlError] = useState(false);
 
   useEffect(() => {
     if (GameData) {
@@ -68,7 +70,6 @@ function Game() {
     let errorMessage = false;
     const historyVar = history.slice();
     const currentCells = historyVar.slice(historyVar.length - 1);
-
     if (isNaN(inputValue)) {
       e.target.value = '';
       return null;
@@ -169,8 +170,14 @@ function Game() {
   const errorControl = () => {
     for (let index = 0; index < cellsState.length; index++) {
       if (cellsState[index].error) {
-        return alert('err');
+        setControlError(true);
+        setControlModalVisible(true);
+        setTimerStop(false);
+        return null;
       }
+      setTimerStop(true);
+      setControlError(false);
+      setControlModalVisible(true);
     }
   };
 
@@ -214,6 +221,14 @@ function Game() {
                 Kontrol Et
               </Button>
             </Col>
+            <Modal
+              title="Sudoku Kontrolu"
+              onCancel={() => setControlModalVisible(false)}
+              footer={false}
+              visible={controlModalVisible}
+            >
+              {controlError ? 'HATA!' : 'HATAYOK'}
+            </Modal>
           </Row>
         </Col>
       </Row>
