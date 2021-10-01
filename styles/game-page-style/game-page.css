@@ -124,3 +124,12 @@ input::-webkit-inner-spin-button {
     margin-right: 4px;
   }
 }
+
+.timer {
+  border: 1px solid #669;
+  border-radius: 10px;
+  padding: 20px;
+  color: #c70039;
+  font-weight: 600;
+  font-size: 18px;
+}

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Row, Col, Button } from 'antd';
 import Board from '../../components/Gamepage/Board.js';
 import GameData from '../../data/game.json';
 
@@ -7,6 +8,8 @@ function Game() {
   const [isLoading, setLoading] = useState(true);
   const [movesLeftState, setMovesLeft] = useState(0);
   const [history, setHistory] = useState([{}]);
+  const [timer, setTimer] = useState(0);
+  const [timerStop, setTimerStop] = useState(false);
 
   useEffect(() => {
     if (GameData) {
@@ -17,6 +20,13 @@ function Game() {
       setHistory([{ cells }]);
     }
   }, [GameData]);
+
+  useEffect(() => {
+    if (!timerStop)
+      setTimeout(() => {
+        setTimer(timer + 1);
+      }, 1000);
+  }, [timer]);
 
   const getInitialCellValue = (x, y, initData) => {
     const sqaureValues = initData;
@@ -95,85 +105,120 @@ function Game() {
     setMovesLeft(movesLeft);
   };
 
-  return (
-    <div>
-      <div className="game-info">
-        <div>{movesLeftState == 0 ? 'Kazandınız!!!' : ''}</div>
-        <ol>{/*-- --*/}</ol>
-      </div>
+  function checkLineValues(cells, cell) {
+    const lineStart = [0, 9, 18, 27, 36, 45, 54, 63, 72];
 
-      <div className="game">
-        <div className="game-board">
-          {isLoading ? (
-            'loading...'
-          ) : (
-            <Board cells={cellsState} onChange={(e, i) => handleClick(e, i)} />
-          )}
-        </div>
-      </div>
+    let k = lineStart[cell.x];
+    for (let i = k; i < 9 + k; i++) {
+      if (cells[i].y !== cell.y && cells[i].value == cell.value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function checkColumnValues(cells, cell) {
+    const lineStart = [0, 9, 18, 27, 36, 45, 54, 63, 72];
+
+    for (let i = 0; i < 9; i++) {
+      let objCell = cells[lineStart[i] + cell.y];
+      if (objCell.x != cell.x && objCell.value == cell.value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  function checkBlockValues(cells, cell) {
+    const lineStart = [0, 3, 6, 27, 30, 33, 54, 57, 60];
+
+    let startIndex = lineStart[0];
+    if (cell.x < 3 && cell.y > 2 && cell.y < 6) {
+      startIndex = lineStart[1];
+    } else if (cell.x < 3 && cell.y > 5) {
+      startIndex = lineStart[2];
+    } else if (cell.x > 2 && cell.x < 6 && cell.y < 3) {
+      startIndex = lineStart[3];
+    } else if (cell.x > 2 && cell.x < 6 && cell.y > 2 && cell.y < 6) {
+      startIndex = lineStart[4];
+    } else if (cell.x > 2 && cell.x < 6 && cell.y > 5) {
+      startIndex = lineStart[5];
+    } else if (cell.x > 5 && cell.y < 3) {
+      startIndex = lineStart[6];
+    } else if (cell.x > 5 && cell.y > 2 && cell.y < 6) {
+      startIndex = lineStart[7];
+    } else if (cell.x > 5 && cell.y > 5) {
+      startIndex = lineStart[8];
+    }
+
+    let increment = 0;
+    for (let i = 0; i < 9; i++) {
+      if (i > 2 && i < 6) {
+        increment = 6;
+      } else if (i > 5) {
+        increment = 12;
+      }
+      const sq = cells[startIndex + i + increment];
+      if (sq.x != cell.x && sq.y != cell.y && sq.value == cell.value) {
+        return false;
+      }
+    }
+    return true;
+  }
+
+  const errorControl = () => {
+    for (let index = 0; index < cellsState.length; index++) {
+      if (cellsState[index].error) {
+        return alert('err');
+      }
+    }
+  };
+
+  return (
+    <div className="wrapper">
+      <Row gutter={[16, 32]}>
+        <Col span={24}>
+          <div className="game-info">
+            <div>{movesLeftState == 0 ? 'Kazandınız!!!' : ''}</div>
+            <ol>{/*-- --*/}</ol>
+          </div>
+        </Col>
+        <Col span={24}>
+          <div className="game">
+            <div className="game-board">
+              {isLoading ? (
+                'loading...'
+              ) : (
+                <Board
+                  cells={cellsState}
+                  onChange={(e, i) => handleClick(e, i)}
+                />
+              )}
+            </div>
+          </div>
+        </Col>
+        <Col span={24}>
+          <Row gutter={8}>
+            <Col span={12}>
+              <div className="timer">
+                {`${parseInt(timer / 60)} dakika ${timer % 60} saniye`}
+              </div>
+            </Col>
+            <Col span={12}>
+              <Button
+                onClick={() => errorControl()}
+                block
+                size="large"
+                type="primary"
+              >
+                Kontrol Et
+              </Button>
+            </Col>
+          </Row>
+        </Col>
+      </Row>
     </div>
   );
-}
-
-function checkLineValues(cells, cell) {
-  const lineStart = [0, 9, 18, 27, 36, 45, 54, 63, 72];
-
-  let k = lineStart[cell.x];
-  for (let i = k; i < 9 + k; i++) {
-    if (cells[i].y !== cell.y && cells[i].value == cell.value) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function checkColumnValues(cells, cell) {
-  const lineStart = [0, 9, 18, 27, 36, 45, 54, 63, 72];
-
-  for (let i = 0; i < 9; i++) {
-    let objCell = cells[lineStart[i] + cell.y];
-    if (objCell.x != cell.x && objCell.value == cell.value) {
-      return false;
-    }
-  }
-  return true;
-}
-
-function checkBlockValues(cells, cell) {
-  const lineStart = [0, 3, 6, 27, 30, 33, 54, 57, 60];
-
-  let startIndex = lineStart[0];
-  if (cell.x < 3 && cell.y > 2 && cell.y < 6) {
-    startIndex = lineStart[1];
-  } else if (cell.x < 3 && cell.y > 5) {
-    startIndex = lineStart[2];
-  } else if (cell.x > 2 && cell.x < 6 && cell.y < 3) {
-    startIndex = lineStart[3];
-  } else if (cell.x > 2 && cell.x < 6 && cell.y > 2 && cell.y < 6) {
-    startIndex = lineStart[4];
-  } else if (cell.x > 2 && cell.x < 6 && cell.y > 5) {
-    startIndex = lineStart[5];
-  } else if (cell.x > 5 && cell.y < 3) {
-    startIndex = lineStart[6];
-  } else if (cell.x > 5 && cell.y > 2 && cell.y < 6) {
-    startIndex = lineStart[7];
-  } else if (cell.x > 5 && cell.y > 5) {
-    startIndex = lineStart[8];
-  }
-
-  let increment = 0;
-  for (let i = 0; i < 9; i++) {
-    if (i > 2 && i < 6) {
-      increment = 6;
-    } else if (i > 5) {
-      increment = 12;
-    }
-    const sq = cells[startIndex + i + increment];
-    if (sq.x != cell.x && sq.y != cell.y && sq.value == cell.value) {
-      return false;
-    }
-  }
-  return true;
 }
 
 export default Game;
