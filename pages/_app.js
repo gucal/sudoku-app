@@ -19,15 +19,18 @@ function MyApp({ Component, pageProps }) {
         }}
       >
         <Menu
+          theme="dark"
           style={{
-            width: '100%',
             maxWidth: '1200px',
+            width: '100%',
             display: 'flex',
-            justifyContent: 'space-between',
           }}
+          selectedKeys={router.asPath}
         >
-          <Menu.Item onClick={() => router.push('/')}>Anasayfa</Menu.Item>
-          <Menu.Item onClick={() => router.push('/lastgames')}>
+          <Menu.Item key="/" onClick={() => router.push('/')}>
+            Anasayfa
+          </Menu.Item>
+          <Menu.Item key="/lastgames" onClick={() => router.push('/lastgames')}>
             Geçmiş Oyunlar
           </Menu.Item>
         </Menu>

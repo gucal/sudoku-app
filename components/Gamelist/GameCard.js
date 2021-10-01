@@ -3,9 +3,9 @@ import { Card } from 'antd';
 import Link from 'next/link';
 const { Meta } = Card;
 
-function GameCard() {
+function GameCard({ gameNumber }) {
   return (
-    <Link href="/gamepage/1">
+    <Link href={`/gamepage/${gameNumber}`}>
       <a>
         <Card
           hoverable

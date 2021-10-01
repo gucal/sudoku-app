@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Modal } from 'antd';
+import { useRouter } from 'next/router';
 import Board from '../../components/Gamepage/Board.js';
-import GameData from '../../data/game.json';
+import GameData from '../../data/game';
 
 function Game() {
+  const router = useRouter();
+  const { id } = router.query;
   const [cellsState, setCellsState] = useState(Array(81).fill(0));
   const [isLoading, setLoading] = useState(true);
   const [movesLeftState, setMovesLeft] = useState(0);
@@ -14,14 +17,14 @@ function Game() {
   const [controlError, setControlError] = useState(false);
 
   useEffect(() => {
-    if (GameData) {
-      const cells = generateInitialBoard(GameData.cells);
+    if (id) {
+      const cells = generateInitialBoard(GameData[id - 1].cells);
       setCellsState(cells);
       setLoading(false);
-      setMovesLeft(81 - GameData.cells.length);
+      setMovesLeft(81 - GameData[id - 1].cells.length);
       setHistory([{ cells }]);
     }
-  }, [GameData]);
+  }, [id]);
 
   useEffect(() => {
     if (!timerStop)
