@@ -7,35 +7,30 @@ function Home() {
 
   return (
     <div className="wrapper">
-      <Row gutter={[16, 16]} className="container">
-        <Col span={24}>
-          <p className="introduction-text">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
-            aliquam molestias soluta temporibus culpa obcaecati architecto,
-            minima, voluptatibus quae debitis pariatur excepturi doloremque
-            numquam harum vitae saepe odio ea ipsam? Lorem ipsum dolor sit amet
-            consectetur adipisicing elit. Ducimus, possimus obcaecati, in vitae,
-            maxime deserunt id reiciendis qui ipsa perferendis dicta ratione.
-            Animi illo velit corrupti suscipit est obcaecati! Quam.
-          </p>
-        </Col>
-        <Col style={{ display: 'flex', justifyContent: 'center' }} span={24}>
-          <Button
-            onClick={() => router.push('/gamelist')}
-            style={{
-              width: '40%',
-              height: '56px',
-              background: '#FBC408',
-              color: '#fff',
-              border: 0,
-              borderRadius: 4,
-            }}
-            size="large"
-          >
-            Start Playing
-          </Button>
-        </Col>
-      </Row>
+      <div className="card">
+        <Row gutter={[16, 16]}>
+          <Col span={24}>
+            <p className="introduction-text">
+              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
+              aliquam molestias soluta temporibus culpa obcaecati architecto,
+              minima, voluptatibus quae debitis pariatur excepturi doloremque
+              numquam harum vitae saepe odio ea ipsam? Lorem ipsum dolor sit
+              amet consectetur adipisicing elit. Ducimus, possimus obcaecati, in
+              vitae, maxime deserunt id reiciendis qui ipsa perferendis dicta
+              ratione. Animi illo velit corrupti suscipit est obcaecati! Quam.
+            </p>
+          </Col>
+          <Col style={{ display: 'flex', justifyContent: 'center' }} span={24}>
+            <Button
+              onClick={() => router.push('/gamelist')}
+              className="start-button"
+              size="large"
+            >
+              Start Playing
+            </Button>
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
