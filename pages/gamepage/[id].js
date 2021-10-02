@@ -184,27 +184,26 @@ function Game() {
   }
 
   const errorControl = () => {
-    for (let index = 0; index < cellsState.length; index++) {
-      if (cellsState[index].error || movesLeftState !== 0) {
-        setControlError(true);
-        setControlModalVisible(true);
-        setTimerStop(false);
-        return null;
+    setControlModalVisible(true);
+    if (movesLeftState >= 1) {
+      setControlError(true);
+      setTimerStop(false);
+    } else {
+      for (let index = 0; index < cellsState.length; index++) {
+        if (cellsState[index].error) {
+          setControlError(true);
+          setTimerStop(false);
+          return null;
+        }
+        setTimerStop(true);
+        storage(id);
+        setControlError(false);
       }
-      setTimerStop(true);
-      storage(id);
-      setControlError(false);
-      setControlModalVisible(true);
     }
   };
 
   return (
     <div className="wrapper" style={{ justifyContent: 'space-evenly' }}>
-      <div className="game-info">
-        <div>{movesLeftState == 0 ? 'Kazandınız!!!' : ''}</div>
-        <ol>{/*-- --*/}</ol>
-      </div>
-
       <div style={{ flex: 2 }} className="game">
         <div className="game-board">
           {isLoading ? (
@@ -243,7 +242,19 @@ function Game() {
           footer={false}
           visible={controlModalVisible}
         >
-          {controlError ? 'HATA!' : 'HATAYOK'}
+          {movesLeftState >= 1 ? (
+            <p>Tüm hücreleri doldurduğundan emin ol</p>
+          ) : controlError ? (
+            <div>
+              HATA! <br /> Cevaplarını kontrol et. Kırmızı renkteki rakamlar
+              yanlış cevabı gösterir.
+            </div>
+          ) : (
+            <div>
+              TEBRİKLER Çözümün Doğru!
+              <br />
+            </div>
+          )}
         </Modal>
       </div>
     </div>
