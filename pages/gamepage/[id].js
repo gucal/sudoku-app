@@ -185,7 +185,7 @@ function Game() {
 
   const errorControl = () => {
     for (let index = 0; index < cellsState.length; index++) {
-      if (cellsState[index].error) {
+      if (cellsState[index].error || movesLeftState !== 0) {
         setControlError(true);
         setControlModalVisible(true);
         setTimerStop(false);
