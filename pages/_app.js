@@ -12,28 +12,45 @@ function MyApp({ Component, pageProps }) {
     <Layout>
       <Header
         style={{
-          background: '#fff',
+          padding: '40px',
           display: 'flex',
           alignItems: 'center',
-          justifyContent: 'center',
+          justifyContent: 'space-between',
         }}
       >
-        <Menu
-          theme="dark"
-          style={{
-            maxWidth: '1200px',
-            width: '100%',
-            display: 'flex',
-          }}
-          selectedKeys={router.asPath}
-        >
-          <Menu.Item key="/" onClick={() => router.push('/')}>
-            Anasayfa
-          </Menu.Item>
-          <Menu.Item key="/lastgames" onClick={() => router.push('/lastgames')}>
-            Geçmiş Oyunlar
-          </Menu.Item>
-        </Menu>
+        <div>
+          <label
+            onClick={() => router.push('/')}
+            style={{
+              cursor: 'pointer',
+              color: '#FFF',
+              fontWeight: '600',
+              fontSize: 32,
+            }}
+          >
+            Sudoku App
+          </label>
+        </div>
+        <div>
+          <Menu
+            theme="dark"
+            style={{
+              width: '100%',
+              display: 'flex',
+            }}
+            selectedKeys={router.asPath}
+          >
+            <Menu.Item key="/" onClick={() => router.push('/')}>
+              Anasayfa
+            </Menu.Item>
+            <Menu.Item
+              key="/lastgames"
+              onClick={() => router.push('/lastgames')}
+            >
+              Geçmiş Oyunlar
+            </Menu.Item>
+          </Menu>
+        </div>
       </Header>
       <Content style={{ width: '100%', background: '#fff' }}>
         <Component {...pageProps} />;
