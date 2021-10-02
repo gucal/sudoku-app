@@ -7,13 +7,15 @@ function GameList() {
 
   return (
     <div className="wrapper">
-      <Row className="container">
-        {Games.map((game, index) => (
-          <Col key={index} span={8}>
-            <GameCard gameNumber={game} />
-          </Col>
-        ))}
-      </Row>
+      <div className="card">
+        <Row className="container">
+          {Games.map((game, index) => (
+            <Col key={index} span={8}>
+              <GameCard gameNumber={game} />
+            </Col>
+          ))}
+        </Row>
+      </div>
     </div>
   );
 }
