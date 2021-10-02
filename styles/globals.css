@@ -18,7 +18,7 @@ a {
 .wrapper {
   display: flex;
   justify-content: center;
-  padding: 72px;
+  padding: 40px;
 }
 
 .container {

@@ -32,21 +32,23 @@ ul {
   float: left;
   font-size: 24px;
   font-weight: bold;
-  line-height: 29px;
-  height: 29px;
+  line-height: 60px;
+  height: 60px;
   margin-right: -1px;
   margin-top: -1px;
   padding: 0;
   text-align: center;
-  width: 29px;
+  width: 60px;
+  cursor: default;
 }
 
 .cell.error {
-  background: #ffb8b8;
+  color: #ff3938;
 }
 
 .cell:focus {
   outline: none;
+  background: #fbc408;
 }
 
 .cell:nth-child(3) {
@@ -61,7 +63,7 @@ ul {
 }
 
 .cell-editable {
-  color: #747474;
+  color: #07a4af;
 }
 
 .game {
@@ -96,40 +98,21 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 
-@media (min-width: 500px) {
-  .cell {
-    background: #fff;
-    border: 1px solid #999;
-    float: left;
-    font-size: 24px;
-    font-weight: bold;
-    line-height: 34px;
-    height: 34px;
-    margin-right: -1px;
-    margin-top: -1px;
-    padding: 0;
-    text-align: center;
-    width: 34px;
-  }
-  .game-info {
-    margin-left: 20px;
-  }
-
-  .game-board {
-    border-block-color: black;
-    border-collapse: collapse;
-    background-color: #ffffff;
-    border: #669 solid 2px;
-    margin-left: 12px;
-    margin-right: 4px;
-  }
-}
-
 .timer {
-  border: 1px solid #669;
+  display: flex;
+  justify-content: center;
   border-radius: 10px;
   padding: 20px;
-  color: #c70039;
+  user-select: none;
+  color: #fff;
   font-weight: 600;
   font-size: 18px;
+  background-color: #07a4af;
+}
+
+.control-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }

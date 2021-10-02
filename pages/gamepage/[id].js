@@ -199,56 +199,53 @@ function Game() {
   };
 
   return (
-    <div className="wrapper">
-      <Row gutter={[16, 32]}>
-        <Col span={24}>
-          <div className="game-info">
-            <div>{movesLeftState == 0 ? 'Kazandınız!!!' : ''}</div>
-            <ol>{/*-- --*/}</ol>
-          </div>
-        </Col>
-        <Col span={24}>
-          <div className="game">
-            <div className="game-board">
-              {isLoading ? (
-                'loading...'
-              ) : (
-                <Board
-                  cells={cellsState}
-                  onChange={(e, i) => handleClick(e, i)}
-                />
-              )}
-            </div>
-          </div>
-        </Col>
-        <Col span={24}>
-          <Row gutter={8}>
-            <Col span={12}>
-              <div className="timer">
-                {`${parseInt(timer / 60)} dakika ${timer % 60} saniye`}
-              </div>
-            </Col>
-            <Col span={12}>
-              <Button
-                onClick={() => errorControl()}
-                block
-                size="large"
-                type="primary"
-              >
-                Kontrol Et
-              </Button>
-            </Col>
-            <Modal
-              title="Sudoku Kontrolu"
-              onCancel={() => setControlModalVisible(false)}
-              footer={false}
-              visible={controlModalVisible}
-            >
-              {controlError ? 'HATA!' : 'HATAYOK'}
-            </Modal>
-          </Row>
-        </Col>
-      </Row>
+    <div className="wrapper" style={{ justifyContent: 'space-evenly' }}>
+      <div className="game-info">
+        <div>{movesLeftState == 0 ? 'Kazandınız!!!' : ''}</div>
+        <ol>{/*-- --*/}</ol>
+      </div>
+
+      <div style={{ flex: 2 }} className="game">
+        <div className="game-board">
+          {isLoading ? (
+            'loading...'
+          ) : (
+            <Board cells={cellsState} onChange={(e, i) => handleClick(e, i)} />
+          )}
+        </div>
+      </div>
+
+      <div className="control-panel">
+        <div className="timer">
+          {`${parseInt(timer / 60)} dakika ${timer % 60} saniye`}
+        </div>
+        <div>
+          <Button
+            style={{
+              height: 70,
+              borderRadius: 10,
+              fontSize: 18,
+              border: 0,
+              background: '#FF5733',
+              fontWeight: '600',
+            }}
+            onClick={() => errorControl()}
+            block
+            size="large"
+            type="primary"
+          >
+            Sonucu Kontrol Et
+          </Button>
+        </div>
+        <Modal
+          title="Sudoku Kontrolu"
+          onCancel={() => setControlModalVisible(false)}
+          footer={false}
+          visible={controlModalVisible}
+        >
+          {controlError ? 'HATA!' : 'HATAYOK'}
+        </Modal>
+      </div>
     </div>
   );
 }
