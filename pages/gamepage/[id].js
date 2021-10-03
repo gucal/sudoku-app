@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Row, Col, Button, Modal } from 'antd';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 import Board from '../../components/Gamepage/Board.js';
 import GameData from '../../data/game';
 
@@ -204,6 +205,9 @@ function Game() {
 
   return (
     <div className="wrapper" style={{ justifyContent: 'space-evenly' }}>
+      <Head>
+        <title>Sudoku | Seviye {id}</title>
+      </Head>
       <div style={{ flex: 2 }} className="game">
         <div className="game-board">
           {isLoading ? (

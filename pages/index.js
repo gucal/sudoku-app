@@ -1,12 +1,16 @@
 import React from 'react';
 import { Row, Col, Button } from 'antd';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 function Home() {
   const router = useRouter();
 
   return (
     <div className="wrapper">
+      <Head>
+        <title>Sudoku</title>
+      </Head>
       <div className="card">
         <Row gutter={[16, 16]}>
           <Col span={24}>
@@ -26,7 +30,7 @@ function Home() {
               className="start-button"
               size="large"
             >
-              Start Playing
+              Oynamaya Başla
             </Button>
           </Col>
         </Row>

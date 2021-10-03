@@ -24,15 +24,19 @@ function LastGames() {
 
   return (
     <div className="wrapper">
-      <Row className="container">
-        <Col span={24}>
-          <Table
-            locale={{ emptyText: 'Geçmiş oyun bulunmamaktadır.' }}
-            dataSource={data}
-            columns={columns}
-          />
-        </Col>
-      </Row>
+      <div className="card">
+        <h2>Tamamlanmış Oyunlar</h2>
+        <Row className="container">
+          <Col span={24}>
+            <Table
+              bordered
+              locale={{ emptyText: 'Tamamlanmış oyun bulunmamaktadır.' }}
+              dataSource={data}
+              columns={columns}
+            />
+          </Col>
+        </Row>
+      </div>
     </div>
   );
 }
