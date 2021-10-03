@@ -25,7 +25,7 @@ function Home() {
                 <span style={{ fontSize: 13 }}>
                   {' '}
                   *(CTRL + Z kombinasyonu ile son hamlelerinizi geri
-                  alabilirsiniz)
+                  alabilirsiniz.)
                 </span>
               </li>
               <li>

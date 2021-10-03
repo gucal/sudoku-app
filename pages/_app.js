@@ -1,5 +1,5 @@
 import '../styles/globals.css';
-import '../styles/game-page-style/game-page.css';
+import '../styles/game-page.css';
 import 'antd/dist/antd.css';
 import { Layout, Menu } from 'antd';
 import { useRouter } from 'next/router';

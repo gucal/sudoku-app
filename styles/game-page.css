@@ -48,7 +48,7 @@ ul {
 
 .cell:focus {
   outline: none;
-  background: #fbc408;
+  background: #fad764;
 }
 
 .cell:nth-child(3) {

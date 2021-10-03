@@ -247,15 +247,15 @@ function Game() {
           visible={controlModalVisible}
         >
           {movesLeftState >= 1 ? (
-            <p>Tüm hücreleri doldurduğundan emin ol</p>
+            <p>Tüm hücreleri doldurduğunuzdan emin olun!</p>
           ) : controlError ? (
             <div>
-              HATA! <br /> Cevaplarını kontrol et. Kırmızı renkteki rakamlar
+              HATA! <br /> Cevaplarınızı kontrol edin. Kırmızı renkteki rakamlar
               yanlış cevabı gösterir.
             </div>
           ) : (
             <div>
-              TEBRİKLER Çözümün Doğru!
+              TEBRİKLER Çözümünüz Doğru!
               <br />
             </div>
           )}
