@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Row, Col, Table } from 'antd';
+import Head from 'next/head';
 
 const columns = [
   {
@@ -24,6 +25,9 @@ function LastGames() {
 
   return (
     <div className="wrapper">
+      <Head>
+        <title>Tamamlanmış Oyunlar</title>
+      </Head>
       <div className="card">
         <h2>Tamamlanmış Oyunlar</h2>
         <Row className="container">
