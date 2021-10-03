@@ -30,7 +30,7 @@ function Home() {
               </li>
               <li>
                 Tamamlanmış bulmacaları tamamlanma süreleri ile birlikte{' '}
-                <Link href="/lastgames">
+                <Link href="/last-games">
                   <a>Geçmiş Oyunlar</a>
                 </Link>{' '}
                 sekmesinde bulabilirsiniz.
@@ -40,7 +40,7 @@ function Home() {
           <Col style={{ display: 'flex', justifyContent: 'center' }} span={24}>
             <Button
               style={{ fontWeight: '600' }}
-              onClick={() => router.push('/gamelist')}
+              onClick={() => router.push('/games')}
               className="start-button"
               size="large"
             >

@@ -21,12 +21,8 @@ function MyApp({ Component, pageProps }) {
         <div>
           <label
             onClick={() => router.push('/')}
-            style={{
-              cursor: 'pointer',
-              color: '#FFF',
-              fontWeight: '600',
-              fontSize: 32,
-            }}
+            className="logo-text"
+            style={{}}
           >
             Sudoku App
           </label>
@@ -44,8 +40,8 @@ function MyApp({ Component, pageProps }) {
               Anasayfa
             </Menu.Item>
             <Menu.Item
-              key="/lastgames"
-              onClick={() => router.push('/lastgames')}
+              key="/last-games"
+              onClick={() => router.push('/last-games')}
             >
               Geçmiş Oyunlar
             </Menu.Item>

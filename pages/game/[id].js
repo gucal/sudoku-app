@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Row, Col, Button, Modal } from 'antd';
+import { Spin, Button, Modal } from 'antd';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Board from '../../components/Gamepage/Board.js';
@@ -8,6 +8,7 @@ import GameData from '../../data/game';
 function Game() {
   const router = useRouter();
   const { id } = router.query;
+
   const [cellsState, setCellsState] = useState(Array(81).fill(0));
   const [isLoading, setLoading] = useState(true);
   const [movesLeftState, setMovesLeft] = useState(0);
@@ -19,7 +20,7 @@ function Game() {
 
   useEffect(() => {
     if (id) {
-      const cells = generateInitialBoard(GameData[id - 1].cells);
+      const cells = createGameBoard(GameData[id - 1].cells);
       setCellsState(cells);
       setLoading(false);
       setMovesLeft(81 - GameData[id - 1].cells.length);
@@ -27,7 +28,7 @@ function Game() {
     }
   }, [id]);
 
-  const storage = async (id) => {
+  const saveStorage = async (id) => {
     let gameHistoryArr = [];
     let gameHistory = await JSON.parse(localStorage.getItem('gameHistory'));
     if (gameHistory) {
@@ -47,25 +48,21 @@ function Game() {
       }, 1000);
   }, [timer]);
 
-  const getInitialCellValue = (x, y, initData) => {
-    const sqaureValues = initData;
+  const createCells = (x, y, initData) => {
+    const cellValues = initData;
     for (let i = x; i < 81; i++) {
-      if (
-        sqaureValues[i] &&
-        sqaureValues[i].x === x &&
-        sqaureValues[i].y === y
-      ) {
-        return sqaureValues[i].value;
+      if (cellValues[i] && cellValues[i].x === x && cellValues[i].y === y) {
+        return cellValues[i].value;
       }
     }
     return null;
   };
 
-  const generateInitialBoard = (gameData) => {
+  const createGameBoard = (gameData) => {
     const cells = [];
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 9; j++) {
-        let value = getInitialCellValue(i, j, gameData);
+        let value = createCells(i, j, gameData);
         let isInitValue = value ? true : false;
         let cell = {
           x: i,
@@ -81,7 +78,7 @@ function Game() {
     return cells;
   };
 
-  const handleClick = (e, i) => {
+  const changeValue = (e, i) => {
     let inputValue = e.target.value;
     let movesLeft = movesLeftState;
     let errorMessage = false;
@@ -95,7 +92,7 @@ function Game() {
       e.target.value = inputValue.charAt(inputValue.length - 1);
     }
 
-    if (inputValue == 0) {
+    if (inputValue == 0 || e.target.value == 0) {
       e.target.value = '';
     }
 
@@ -176,8 +173,8 @@ function Game() {
       } else if (i > 5) {
         increment = 12;
       }
-      const sq = cells[startIndex + i + increment];
-      if (sq.x != cell.x && sq.y != cell.y && sq.value == cell.value) {
+      const cl = cells[startIndex + i + increment];
+      if (cl.x != cell.x && cl.y != cell.y && cl.value == cell.value) {
         return false;
       }
     }
@@ -197,7 +194,7 @@ function Game() {
           return null;
         }
         setTimerStop(true);
-        storage(id);
+        saveStorage(id);
         setControlError(false);
       }
     }
@@ -209,13 +206,13 @@ function Game() {
         <title>Sudoku | Seviye {id}</title>
       </Head>
       <div style={{ flex: 2 }} className="game">
-        <div className="game-board">
-          {isLoading ? (
-            'loading...'
-          ) : (
-            <Board cells={cellsState} onChange={(e, i) => handleClick(e, i)} />
-          )}
-        </div>
+        {isLoading ? (
+          <Spin />
+        ) : (
+          <div className="game-board">
+            <Board cells={cellsState} onChange={(e, i) => changeValue(e, i)} />
+          </div>
+        )}
       </div>
 
       <div className="control-panel">

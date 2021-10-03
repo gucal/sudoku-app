@@ -1,8 +1,3 @@
-.introduction-text {
-  font-size: 18px;
-  text-align: left;
-}
-
 ol,
 ul {
   padding-left: 30px;
@@ -20,10 +15,6 @@ ul {
 
 .board-row:nth-child(6) {
   border-bottom: 3px solid #669;
-}
-
-.status {
-  margin-bottom: 10px;
 }
 
 .cell {
@@ -56,10 +47,6 @@ ul {
 }
 .cell:nth-child(6) {
   border-right: 3px solid #669;
-}
-
-.kbd-navigation .cell:focus {
-  background: #ddd;
 }
 
 .cell-editable {

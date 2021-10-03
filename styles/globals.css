@@ -32,6 +32,7 @@ a {
   padding: 30px;
   box-shadow: 1px 1px 6px 2px rgba(148, 144, 144, 0.47);
   border-radius: 10px;
+  background-color: #fff;
 }
 
 .start-button {
@@ -45,4 +46,26 @@ a {
 
 .how-to-play {
   font-size: 18px;
+}
+
+.logo-text {
+  cursor: pointer;
+  color: #fff;
+  font-weight: 600;
+  font-size: 32px;
+}
+
+@media (max-width: 700px) {
+  .wrapper {
+    padding: 10px;
+  }
+  .logo-text {
+    font-size: 12px;
+  }
+  .card {
+    padding: 10px;
+  }
+  .start-button {
+    width: 100% !important;
+  }
 }
